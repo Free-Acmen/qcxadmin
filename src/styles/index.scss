@@ -1,0 +1,158 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+p{margin: 0;}
+
+// main-container global css
+.app-container {
+  padding: 10px 20px;
+}
+
+.header{
+  height: 32px;
+  line-height: 32px;
+  margin-bottom: 10px;
+}
+
+.fliter-box{
+  margin-bottom: 10px;
+}
+
+.fixed-footer{
+  .content{
+    padding-bottom: 50px;
+  }
+  .footer{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    height: 40px;
+    z-index: 9;
+    width: calc(100% - 210px);
+    background: #fff;
+    -webkit-transition: width 0.28s;
+    transition: width 0.28s;
+  }
+}
+
+.hideSidebar .fixed-footer{
+  .footer{
+    width: calc(100% - 54px);
+  }
+}
+
+.router-link{
+  color: #409EFF;
+}  
+.router-link:hover{
+  color: #5499e1;
+}  
+
+.ellipsis{
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+ul,ol,li{padding:0;margin:0;list-style: none;}
+
+.tooltip-btn{
+  font-size: 17px;line-height: 32px;padding: 0 5px;
+}
+
+.refreshbtn{
+  font-size: 26px;
+  position: relative;
+  top: 4px;
+  left: 5px;
+  cursor: pointer;
+  color: #409eff;
+}
+.refreshanimate{
+  animation: firstdiv 2s linear infinite;   
+}
+@keyframes firstdiv{
+  0%{
+      transform: rotate(0);
+    }
+  100%{
+        transform: rotate(360deg);
+  }
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background-color: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgba(0,0,0,.2);
+}
+
+body::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: #F1F1F1;
+}
