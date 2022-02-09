@@ -81,7 +81,7 @@ export default {
       this.$emit('preview', file)
     },
     handleSuccess(response, file, fileList){
-      if(response.success){
+      if(response.success&&response.data){
         this.$emit('success', response, file, fileList)
       }else{
         this.CFunc.showMsg('上传文件失败!', 'error')

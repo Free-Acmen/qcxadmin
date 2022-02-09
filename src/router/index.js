@@ -94,6 +94,12 @@ export const asyncRouterMap = [
         name: 'Check',
         component: () => import('@/views/score/check/index'),
         meta: { title: '分数核对', icon: 'taskcenter' , roles: ['admin']},
+      },
+      {
+        path: 'historyinfo',
+        name: 'HistoryInfo',
+        component: () => import('@/views/score/historyinfo/index'),
+        meta: { title: '历史信息', icon: 'taskcenter' , roles: ['admin']},
       }
     ]
   },

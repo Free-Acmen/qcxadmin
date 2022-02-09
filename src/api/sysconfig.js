@@ -132,3 +132,13 @@ export function importAddress(data) {
     data
   })
 }
+
+//导入地址  还未对接
+export function getNextPaths(data) {
+  return request({
+    url: 'HYJY/Paths/GetNextPaths',
+    method: 'post',
+    data
+  })
+}
+

@@ -3,7 +3,7 @@
     <header class="header">
       <span>用户管理</span>
       <svg-icon @click='refresh' :class-name="refreshclass" icon-class='refresh'/>
-      <el-button style="float: right"  type="primary" @click="ModuleHandle(-1)">新增用户</el-button> 
+      <el-button v-if="userInfo.IsSuperAdmin" style="float: right"  type="primary" @click="ModuleHandle(-1)">新增用户</el-button> 
     </header>
     <section class="content">
       <!-- <div class="fliter-box">
@@ -35,6 +35,13 @@
           		{{scope.row.MobilePhone?scope.row.MobilePhone:'无'}}        
           </template>
         </el-table-column> 
+        <el-table-column label="负责区域" >
+          <template slot-scope="scope">
+            <span v-if="scope.row.RoleId=='ALL'">所有区域</span>
+            <span v-else>{{scope.row.RoleName||scope.row.RoleId}}</span>
+          </template>
+        </el-table-column> 
+        
         <el-table-column label="邮箱" >
           <template slot-scope="scope">
           		{{scope.row.Email?scope.row.Email:'无'}}        
@@ -65,8 +72,8 @@
          <el-table-column label="操作" width="150">
           <template slot-scope="scope">
           	<el-button type="text" v-if="userInfo.IsSuperAdmin" @click="reSetPassword(scope.row, scope.$index)" >重置密码</el-button>
-            <el-button type="text" @click="ModuleHandle(scope.row, scope.$index)">编辑</el-button>
-            <el-button type="text" @click="Del(scope.row, scope.$index)">删除</el-button>
+            <el-button type="text" v-if="userInfo.IsSuperAdmin" @click="ModuleHandle(scope.row, scope.$index)">编辑</el-button>
+            <el-button type="text" v-if="userInfo.IsSuperAdmin" @click="Del(scope.row, scope.$index)">删除</el-button>
           </template>
         </el-table-column> 
       </el-table>
