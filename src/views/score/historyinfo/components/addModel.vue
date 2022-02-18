@@ -1,47 +1,37 @@
 <template>
-  <div class="user-model">
+  <div class="user-model" v-if="isShow">
     <el-dialog  :title="option.title" :top="option.top" :close-on-click-modal="false" :modal="option.isModal" :visible.sync="isShow"  :width="option.width" append-to-body @opened="openHandle">
       <div>
         <el-form label-position="left" label-width="80px" :model="formData" :rules="rules" inline-message ref="userModelForm">
           <el-row :gutter="20">
             <el-col :span="6">
               <el-form-item  prop="p1id" label="省市">
-                <el-select v-model="formData.p1id" placeholder="省市" @change="p1idListChange">
+                <el-select v-model="formData.p1id" placeholder="省市" filterable @change="p1idListChange()">
                   <el-option v-for="item in p1idList" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item  prop="p2id" label="院校">
-                <el-select v-model="formData.p2id" placeholder="院校" @change="p2idListChange">
+                <el-select v-model="formData.p2id" placeholder="院校" filterable @change="p2idListChange()">
                   <el-option v-for="item in p2idList" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item  prop="p3id" label="院系">
-                <el-select v-model="formData.p3id" placeholder="院系" @change="p3idListChange">
+                <el-select v-model="formData.p3id" placeholder="院系" filterable @change="p3idListChange()">
                   <el-option v-for="item in p3idList" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item  prop="p4id" label="专业">
-                <el-select v-model="formData.p4id" placeholder="专业">
+                <el-select v-model="formData.p4id" placeholder="专业" filterable>
                   <el-option v-for="item in p4idList" :key="item.id" :label="item.name" :value="item.id"></el-option>
                 </el-select>
               </el-form-item>
             </el-col>
-            <!-- <el-col :span="6">
-              <el-form-item  prop="RealName" label="姓名">
-                <el-input v-model="formData.RealName" placeholder="请输入姓名"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="6">
-              <el-form-item  prop="UserName" label="手机号">
-                {{formData.UserName}}
-              </el-form-item>
-            </el-col> -->
 
             <el-col :span="24">
               <el-form-item  prop="Content" label="信息内容">
@@ -49,23 +39,7 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <!-- <el-row>
-            <el-col :span="10" v-for="(item, index) in formData.InputData" :key="index" :offset="index%2==0 ? 0 : 2">
-              <el-form-item :prop="'InputData.'+index+'.grade'" :label="item.name" :rules="[{required: true, message: '该项必填', trigger: 'blur'}]">
-                <el-input-number v-model="item.grade" :controls="false" :min="0"></el-input-number>
-              </el-form-item>
-            </el-col>
-          </el-row> -->
-          <!-- <div style="height: 260px;">
-            <tyimg :src="'//adm.kaoyanxiao.com/dat/Uploads'+formData.Image"></tyimg>
-          </div>
-          <el-row>
-            <el-col :span="22">
-              <el-form-item  prop="Remark" label="备注">
-                <el-input type="textarea" v-model="formData.Remark" :rows="4" placeholder="请输入备注"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row> -->
+         
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -147,19 +121,26 @@ export default {
           p1idKey[item.id] = item
         });
       })
+      this.openHandle()
     },
     openHandle: function(){
-      this.$refs.userModelForm.resetFields()
-      this.formData.Image = ''
+      // this.$refs.userModelForm.resetFields()
+      this.formData = Object.assign({}, this.$options.data().formData) 
+
       if(this.initData){
+        console.log(this.initData)
+        // Object.assign(this.formData, this.initData)
+        this.p1idListChange(this.initData.p1id)
+        this.p2idListChange(this.initData.p2id)
+        this.p3idListChange(this.initData.p3id)
+
         Object.assign(this.formData, this.initData)
-        this.formData.InputData = JSON.parse(this.formData.InputData)
-      }else{
-        this.formData = Object.assign({}, this.$options.data().formData) 
+
+        // this.formData.InputData = JSON.parse(this.formData.InputData)
       }
     },
-    p1idListChange: function(){
-      getNextPaths(this.formData.p1id).then(res => {
+    p1idListChange: function(id){
+      getNextPaths(id||this.formData.p1id).then(res => {
         this.p2idList = res.data
         this.p2idList.forEach(item => {
           p2idKey[item.id] = item
@@ -173,8 +154,8 @@ export default {
       this.formData.p4id = ''
       // this.GetList(1)
     },
-    p2idListChange: function(){
-      let data = JSON.stringify(this.formData.p2id)
+    p2idListChange: function(id){
+      let data = JSON.stringify(id||this.formData.p2id)
       getNextPaths(data).then(res => {
         this.p3idList = res.data
         this.p3idList.forEach(item => {
@@ -187,8 +168,8 @@ export default {
       this.formData.p4id = ''
       // this.GetList(1)
     },
-    p3idListChange: function(){
-      let data = JSON.stringify(this.formData.p3id)
+    p3idListChange: function(id){
+      let data = JSON.stringify(id||this.formData.p3id)
       getNextPaths(data).then(res => {
         this.p4idList = res.data
         this.p4idList.forEach(item => {
@@ -213,6 +194,8 @@ export default {
           formdata.p2name = p2idKey[formdata.p2id].name
           formdata.p3name = p3idKey[formdata.p3id].name
           formdata.p4name = p4idKey[formdata.p4id].name
+
+          delete formdata.index
 
           this.$emit('formdata', formdata, this.option.backdata)
           this.isShow = false

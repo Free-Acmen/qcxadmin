@@ -92,17 +92,17 @@
 
         <el-table-column label="信息内容">
           <template slot-scope="scope">
-          	<div class="ellipsis" :title="scope.row.Remark">
-          		{{scope.row.Content}}
+          	<div class="ellipsis content" :title="scope.row.Remark" v-html="scope.row.Content">
+          		<!-- {{scope.row.Content}} -->
           	</div>            
           </template>
         </el-table-column>  
         
-        <el-table-column label="创建时间"  sortable="custom" prop="CreateTime" width="140">
+        <!-- <el-table-column label="创建时间"  sortable="custom" prop="CreateTime" width="140">
           <template slot-scope="scope">
           	{{scope.row.CreateTime}}        
           </template>
-        </el-table-column>
+        </el-table-column> -->
         
         <el-table-column label="操作" width="100">
           <template slot-scope="scope">
@@ -122,11 +122,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import tyPage from '@/components/TyPagination'
-import addModel from './components/addModel'
 import pageMixin from '@/mixin/tabePageMixin'
-import { getList, add, del, update} from '@/api/commonCrud'
+import addModel from './components/addModel'
 
-import { getNextPaths, setStatus, setAllStatus, exportTab } from '@/api/score'
+import { getList, add, del, update} from '@/api/commonCrud'
+import { getNextPaths } from '@/api/score'
 
 let p1idKey = {}
 
@@ -136,29 +136,29 @@ export default {
       title: '学校专业历史信息',
       apiPath: 'HYJY/History',
       getPage: true,
-      tabName: [
-        {name: '待核实', val:'待核实'},
-        {name: '已核实', val:'已核实'},
-        {name: '垃圾箱', val:'垃圾箱'}
-      ],
+      // tabName: [
+      //   {name: '待核实', val:'待核实'},
+      //   {name: '已核实', val:'已核实'},
+      //   {name: '垃圾箱', val:'垃圾箱'}
+      // ],
       p1idList:[],
       p2idList:[],
       p3idList:[],
       p4idList:[],
       filter: {
         OrderBy: '',
-        Status: '待核实',
-        UserName: '',
-        RealName:'',
+        // Status: '待核实',
+        // UserName: '',
+        // RealName:'',
         p1id: '',
         p2id: '',
         p3id: '',
         p4id: '',
-        TGStart: '',
-        TGEnd: ''
+        // TGStart: '',
+        // TGEnd: ''
       },
-      multipleSelection: [],
-      tableKey: [],
+      // multipleSelection: [],
+      // tableKey: [],
     }
   },
   mixins: [pageMixin],
@@ -173,7 +173,7 @@ export default {
   components: {
   	addModel: addModel,
     tyPage: tyPage
-  },
+  }, 
   created() {
     getNextPaths(0).then(res => {
       // console.log(res)
@@ -188,58 +188,58 @@ export default {
     add,
     del, 
     update,
-    exportExcel(){
-      exportTab(this.filter).then( res => {
-        // console.log(res)
-        var url = "//adm.kaoyanxiao.com/dat/Uploads/" + res.message
-        window.location.href = url
-        // window.open(url, '_blank')
-      })
-    },
-    dataLodered: function(){
-      if(this.list[0]){
-        this.tableKey = JSON.parse(this.list[0].InputData)
-      }else{
-        this.tableKey = []    
-      }
-    },
-    handleSelectionChange: function(val){
-      this.multipleSelection = val;
-    },
-    allSetStatus: function(status){
-      if(this.multipleSelection.length <= 0){
-        this.$message({
-          type: 'warning',
-          message: '请至少选择一项数据！'
-        });
-        return
-      }
-      var ids = []
-      this.multipleSelection.forEach(item => {
-        ids.push(item.Id)
-      })
+    // exportExcel(){
+    //   exportTab(this.filter).then( res => {
+    //     // console.log(res)
+    //     var url = "//adm.kaoyanxiao.com/dat/Uploads/" + res.message
+    //     window.location.href = url
+    //     // window.open(url, '_blank')
+    //   })
+    // },
+    // dataLodered: function(){
+    //   if(this.list[0]){
+    //     this.tableKey = JSON.parse(this.list[0].InputData)
+    //   }else{
+    //     this.tableKey = []    
+    //   }
+    // },
+    // handleSelectionChange: function(val){
+    //   this.multipleSelection = val;
+    // },
+    // allSetStatus: function(status){
+    //   if(this.multipleSelection.length <= 0){
+    //     this.$message({
+    //       type: 'warning',
+    //       message: '请至少选择一项数据！'
+    //     });
+    //     return
+    //   }
+    //   var ids = []
+    //   this.multipleSelection.forEach(item => {
+    //     ids.push(item.Id)
+    //   })
 
-      // console.log(status)
-      let mesg = '确认将改批数据全部设置到"' + status + '"中!';
-      this.$confirm(mesg, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          let data = {
-            uids: ids.join(','),
-            status: status
-          }
-          // console.log(data)
-          setAllStatus(data).then( res => {
-            this.$message({
-              type: 'success',
-              message: '设置成功！'
-            });
-            this.GetList()
-          })
-        }).catch(() => { });
-    },
+    //   // console.log(status)
+    //   let mesg = '确认将改批数据全部设置到"' + status + '"中!';
+    //   this.$confirm(mesg, '提示', {
+    //       confirmButtonText: '确定',
+    //       cancelButtonText: '取消',
+    //       type: 'warning'
+    //     }).then(() => {
+    //       let data = {
+    //         uids: ids.join(','),
+    //         status: status
+    //       }
+    //       // console.log(data)
+    //       setAllStatus(data).then( res => {
+    //         this.$message({
+    //           type: 'success',
+    //           message: '设置成功！'
+    //         });
+    //         this.GetList()
+    //       })
+    //     }).catch(() => { });
+    // },
     sortChange: function(sortData){
       // $(".diy-sort-handle").find('.caret-wrapper').removeClass('descending').removeClass('ascending') //去除自定义排序的样式
       let sortBy = [] //['BigCateRank asc']
@@ -254,9 +254,9 @@ export default {
       this.GetList()
       // console.log(sortData)
     },
-    handleClick: function(){
-      this.GetList(1)
-    },
+    // handleClick: function(){
+    //   this.GetList(1)
+    // },
     p1idListChange: function(){
       getNextPaths(this.filter.p1id).then(res => {
         this.p2idList = res.data
@@ -292,44 +292,50 @@ export default {
     p4idListChange: function(){
       this.GetList(1)      
     },
-    handleCommand(command) {
-      let mesg = '确认将改数据设置到"' + command.status + '"中!';
-      this.$confirm(mesg, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          let data = {
-            uid: command.data.Id,
-            status: command.status
-          }
-          setStatus(data).then( res => {
-            this.$message({
-              type: 'success',
-              message: '设置成功！'
-            });
-            this.GetList()
-          })
-        }).catch(() => { });
-     
-    }
+    // handleCommand(command) {
+    //   let mesg = '确认将改数据设置到"' + command.status + '"中!';
+    //   this.$confirm(mesg, '提示', {
+    //     confirmButtonText: '确定',
+    //     cancelButtonText: '取消',
+    //     type: 'warning'
+    //   }).then(() => {
+    //     let data = {
+    //       uid: command.data.Id,
+    //       status: command.status
+    //     }
+    //     setStatus(data).then( res => {
+    //       this.$message({
+    //         type: 'success',
+    //         message: '设置成功！'
+    //       });
+    //       this.GetList()
+    //     })
+    //   }).catch(() => { });
+    // }
   }
 }
 </script>
 
 <style lang="scss">
-  .el-dropdown-link {
-    cursor: pointer;
-    color: #409EFF;
-    margin-left: 5px;
-  }
-  .fliter-range-ipt{
-    width: 100%;
-  }
-  .pic-img{
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
+  // .el-dropdown-link {
+  //   cursor: pointer;
+  //   color: #409EFF;
+  //   margin-left: 5px;
+  // }
+  // .fliter-range-ipt{
+  //   width: 100%;
+  // }
+  // .pic-img{
+  //   width: 20px;
+  //   height: 20px;
+  //   vertical-align: middle;
+  // }
+  .content{
+    img{
+      width:50px;
+      height:50px;
+      vertical-align: middle;
+    }
   }
 </style>
 

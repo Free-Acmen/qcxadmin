@@ -105,11 +105,17 @@ export default{
       this.Update(rowData)
     },
     Del: function(rowData){    	
-      let Id = JSON.stringify(rowData.Id)
-      this.del(this.apiPath, Id).then( res => {
-        this.CFunc.showMsg('删除成功!')
-        this.GetList()
-      })
+      this.$confirm('确定要是删除该条数据吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        let Id = JSON.stringify(rowData.Id)
+        this.del(this.apiPath, Id).then( res => {
+          this.CFunc.showMsg('删除成功!')
+          this.GetList()
+        })
+      }).catch(() => {});
     },
     //列表选中高亮
     ListRowHight: function(row,event,column){
