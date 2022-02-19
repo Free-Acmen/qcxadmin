@@ -91,7 +91,7 @@
           <template slot-scope="scope">
           	<div> 
               <img v-if="scope.row.MsgStatus" title="已短信通知" class="pic-img" src="@/assets/tips.png" alt="已通知">
-              <img v-if="scope.row.Checked" title="已审核" class="pic-img" src="@/assets/examine.png" alt="已审核">
+              <img v-if="scope.row.Checked" style="width:20px;height:20px;" title="已审核" class="pic-img" src="@/assets/examine.png" alt="已审核">
               <span style="color: #67C23A;display:inline-block;min-width: 30px;">{{scope.row.TotalGrade/100}}</span>
               <div style="color: #67C23A;display:inline-block;">
                 <el-popover
@@ -262,7 +262,8 @@ export default {
         }).then(() => {
           let data = {
             uids: ids.join(','),
-            status: status
+            status: status,
+            Checked: status=='已核实'?true:false
           }
           // console.log(data)
           setAllStatus(data).then( res => {
@@ -335,7 +336,8 @@ export default {
         }).then(() => {
           let data = {
             uid: command.data.Id,
-            status: command.status
+            status: command.status,
+            Checked: command.status=='已核实'?true:false
           }
           setStatus(data).then( res => {
             this.$message({

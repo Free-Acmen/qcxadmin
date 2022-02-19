@@ -27,6 +27,16 @@
           <div style="height: 260px;">
             <tyimg :src="'//adm.kaoyanxiao.com/dat/Uploads'+formData.Image"></tyimg>
           </div>
+
+          <el-row>
+            <el-col :span="22">
+              <el-form-item  prop="Checked" label="审核状态">
+                <el-radio v-model="formData.Checked" :label="true">已审核</el-radio>
+                <el-radio v-model="formData.Checked" :label="false">未审核</el-radio>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          
           <el-row>
             <el-col :span="22">
               <el-form-item  prop="Remark" label="备注">
@@ -34,6 +44,7 @@
               </el-form-item>
             </el-col>
           </el-row>
+
         </el-form>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -66,6 +77,7 @@ export default {
         UserName: '',
         Image: '',
         InputData: [],
+        Checked: false,
       	Remark:'',
       },
       rules: {
