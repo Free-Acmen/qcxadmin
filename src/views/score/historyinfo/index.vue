@@ -19,22 +19,22 @@
             <el-input v-model.trim="filter.RealName" @change="GetList(1)" placeholder="姓名" clearable></el-input>
           </el-col> -->
           <el-col :span="3">
-            <el-select v-model="filter.p1id" placeholder="省市" filterable  @change="p1idListChange">
+            <el-select v-model="filter.p1id" placeholder="省市" filterable  @change="p1idListChange" clearable>
               <el-option v-for="item in p1idList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-col>
           <el-col :span="3">
-            <el-select v-model="filter.p2id" placeholder="院校" filterable  @change="p2idListChange">
+            <el-select v-model="filter.p2id" placeholder="院校" filterable  @change="p2idListChange" clearable>
               <el-option v-for="item in p2idList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-col>
           <el-col :span="3">
-            <el-select v-model="filter.p3id" placeholder="院系" filterable  @change="p3idListChange">
+            <el-select v-model="filter.p3id" placeholder="院系" filterable  @change="p3idListChange" clearable>
               <el-option v-for="item in p3idList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-col>
           <el-col :span="3">
-            <el-select v-model="filter.p4id" placeholder="专业" filterable  @change="p4idListChange">
+            <el-select v-model="filter.p4id" placeholder="专业" filterable  @change="p4idListChange" clearable>
               <el-option v-for="item in p4idList" :key="item.id" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-col>
