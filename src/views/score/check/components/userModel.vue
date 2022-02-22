@@ -25,7 +25,7 @@
             </el-col>
           </el-row>
           <div style="height: 260px;">
-            <tyimg :src="'//adm.kaoyanxiao.com/dat/Uploads'+formData.Image"></tyimg>
+            <tyimg :lazy="false" :src="'//adm.kaoyanxiao.com/dat/Uploads'+formData.Image"></tyimg>
           </div>
 
           <el-row>

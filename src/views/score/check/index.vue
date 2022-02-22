@@ -101,7 +101,7 @@
                   trigger="hover"
                  >
                  <div>
-                    <tyimg v-if="scope.row.Image" :src="'//adm.kaoyanxiao.com/dat/Uploads'+ scope.row.Image"></tyimg>
+                    <tyimg :lazy="false" v-if="scope.row.Image" :src="'//adm.kaoyanxiao.com/dat/Uploads'+ scope.row.Image"></tyimg>
                     <span v-else>未上传分数明细图片</span>
                  </div>
                   <el-button type='text' style="color: #409EFF;" slot="reference"><i class="el-icon-picture" style="font-size: 14px;"></i></el-button>

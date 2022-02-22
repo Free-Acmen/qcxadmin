@@ -131,6 +131,20 @@ module.exports = {
               }
             })
           config.optimization.runtimeChunk('single')
+
+          config.plugin('copy')
+            .use(require('copy-webpack-plugin'),[
+              [{
+                from: resolve('public/static'),
+                to: 'static',
+                ignore: ['.*']
+              },
+              {
+                from: resolve('public/favicon.ico'),
+                to: '',
+                ignore: ['.*']
+              }]
+            ])
         }
       )
   }
