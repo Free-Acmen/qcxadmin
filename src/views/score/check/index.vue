@@ -51,7 +51,7 @@
               <el-col :span="2" style="text-align:center;line-height: 30px;">-</el-col>
               <el-col :span="9">
                 <tynumbipt tyclass="fliter-range-ipt" :precision='2' :min="0" v-model="filter.TGEnd" @change="GetList(1)"></tynumbipt>
-                <!-- <el-input-number style="width:100%;" v-model="filter.TGEnd" controls-position="right" placeholder="大" @change="GetList(1)" :controls="false" :min="0"></el-input-number> -->
+                <!-- <el-input-number style="width:100%;" v-model="filter.TGEnd" controls-position="right" placeholder="大" @change="GetList(1)" :controls="false" :min="0"></el-input-number> --> 
               </el-col>
             </el-row>
           </el-col>
@@ -90,7 +90,7 @@
         <el-table-column label="总分" sortable="custom" prop="TotalGrade" width="120">
           <template slot-scope="scope">
           	<div> 
-              <img v-if="scope.row.MsgStatus" title="已短信通知" class="pic-img" src="@/assets/tips.png" alt="已通知">
+              <img v-if="scope.row.MsgStatus" style="width:20px;height:20px;" title="已短信通知" class="pic-img" src="@/assets/tips.png" alt="已通知">
               <img v-if="scope.row.Checked" style="width:20px;height:20px;" title="已审核" class="pic-img" src="@/assets/examine.png" alt="已审核">
               <span style="color: #67C23A;display:inline-block;min-width: 30px;">{{scope.row.TotalGrade/100}}</span>
               <div style="color: #67C23A;display:inline-block;">

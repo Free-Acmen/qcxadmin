@@ -28,7 +28,11 @@ export default{
       if(this.filter){
         Object.keys(this.filter).forEach( key => {
           if(this.filter[key] || this.filter[key] === 0 || this.filter[key] === '0' || this.filter[key] === false){
-            data[key] = this.filter[key]
+            if(key=='TGStart'||key=='TGEnd'){
+              data[key] = this.filter[key]*100
+            }else{
+              data[key] = this.filter[key]
+            }
           }
         })
       }
