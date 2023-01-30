@@ -127,22 +127,15 @@
           	</div>            
           </template>
         </el-table-column>  
-         <el-table-column label="操作" width="150">
+         <el-table-column label="操作" header-align="center" width="190">
           <template slot-scope="scope">
           	<!-- <el-button type="text" v-if="userInfo.IsSuperAdmin" @click="reSetPassword(scope.row, scope.$index)" >重置密码</el-button> -->
             <el-button type="text" @click="ModuleHandle(scope.row, scope.$index)">编辑</el-button>
 
             <el-button type="text" v-if="item.val !== scope.row.Status" v-for="(item, index) in tabName" :key="index" @click="handleCommand({status: item.val, data: scope.row})">{{item.name}}</el-button>
 
-            <!-- <el-dropdown @command="handleCommand" trigger="click">
-              <span class="el-dropdown-link" >
-                设置<i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-if="item.val !== scope.row.Status" :command="{status: item.val, data: scope.row}" v-for="(item, index) in tabName" :key="index">{{item.name}}</el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown> -->
-            <!-- <el-button type="text" @click="Del(scope.row, scope.$index)">删除</el-button> -->
+            <el-button type="text" style="color:#E6A23C;" @click="viewLog(scope.row)">日志</el-button>
+            
           </template>
         </el-table-column> 
       </el-table>
@@ -151,6 +144,7 @@
       <ty-page ref="tyPage" @pagechange="PageChange"></ty-page>
     </footer>
     <user-model ref='module' @formdata="ModuleDataHandle"></user-model>
+    <logs ref="logs"></logs>
   </div>
 </template>
 
@@ -159,8 +153,9 @@ import { mapGetters } from 'vuex'
 import tyPage from '@/components/TyPagination'
 import userModel from './components/userModel'
 import pageMixin from '@/mixin/tabePageMixin'
-import { getList, del, update} from '@/api/commonCrud'
+import logs from './components/logs'
 
+import { getList, del, update} from '@/api/commonCrud'
 import { getNextPaths, setStatus, setAllStatus, exportTab } from '@/api/score'
 
 let p1idKey = {}
@@ -206,7 +201,8 @@ export default {
     ])
   },
   components: {
-  	userModel: userModel,
+    userModel: userModel,
+    logs: logs,
     tyPage: tyPage
   },
   created() {
@@ -326,6 +322,9 @@ export default {
     },
     p4idListChange: function(){
       this.GetList(1)      
+    },
+    viewLog(row){
+      this.$refs.logs.show(row, {})
     },
     handleCommand(command) {
       let mesg = '确认将改数据设置到"' + command.status + '"中!';

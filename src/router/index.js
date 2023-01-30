@@ -100,7 +100,14 @@ export const asyncRouterMap = [
         name: 'HistoryInfo',
         component: () => import('@/views/score/historyinfo/index'),
         meta: { title: '历史信息', icon: 'taskcenter' , roles: ['admin']},
-      }
+      },
+      {
+        path: 'professionalmanagement',
+        name: 'ProfessionalManagement',
+        component: () => import('@/views/score/professionalmanagement/index'),
+        meta: { title: '专业维护', icon: 'taskcenter' , roles: ['admin']},
+      },
+      
     ]
   },
   sysconfig,

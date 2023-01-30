@@ -34,4 +34,12 @@ export function exportTab(data) {
   })
 }
 
+export function getStatusLog(data) {
+  return request({
+  	url:'HYJY/Users/SetStatusLog',
+  	method: 'post',
+  	data
+  })
+}
+
 
