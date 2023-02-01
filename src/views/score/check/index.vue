@@ -72,7 +72,12 @@
  
         <el-table-column label="姓名" width="100">
           <template slot-scope="scope">
-          		{{scope.row.RealName?scope.row.RealName:'无'}}        
+          	{{scope.row.RealName?scope.row.RealName:'无'}}        
+          </template>
+        </el-table-column>
+        <el-table-column label="报考院校" width="130">
+          <template slot-scope="scope">
+          	{{scope.row.p2name}}        
           </template>
         </el-table-column>
 

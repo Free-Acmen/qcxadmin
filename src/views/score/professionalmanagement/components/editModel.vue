@@ -5,39 +5,13 @@
         <el-form label-position="left" label-width="120px" :model="formData" :rules="rules" inline-message ref="form">
           <el-row :gutter="20">
             <el-col :span="24">
-              <el-form-item :label="levelLabel">
-                {{initData.name}}
+              <el-form-item :label="pLabel">
+                {{initData.pname}}
               </el-form-item>
             </el-col>
-            <el-col :span="24" v-if="initData.level==1">
-              <el-form-item  prop="p2name" label="院校">
-                <el-input v-model="formData.p2name" placeholder="请输入院校名称"></el-input>
-              </el-form-item>
-            </el-col>
-
-            <el-col :span="24" v-if="initData.level==2">
-              <el-form-item  prop="p3name" label="院系">
-                <el-input v-model="formData.p3name" placeholder="请输入院校名称"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24" v-if="initData.level==3">
-              <el-form-item  prop="p4name" label="专业">
-                <el-input v-model="formData.p4name" placeholder="请输入专业名称"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24" v-if="initData.level==4">
-              <el-form-item  prop="p5name" label="专业方向">
-                <el-input v-model="formData.p4name" placeholder="请输入专业名称"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="24" v-if="initData.level==5">
-              <el-form-item  prop="p6name" label="专业方向课程">
-                <el-input v-model="formData.p6name" placeholder="如: 思想政治理论+英语（一）+数学（三）+金融学综合"></el-input>
-              </el-form-item>
-            </el-col>
-             <el-col :span="24" v-if="initData.level==6">
-              <el-form-item  prop="p7name" label="课程名称">
-                <el-input v-model="formData.p7name" placeholder="如: 金融学综合"></el-input>
+            <el-col :span="24">
+              <el-form-item  prop="name" :label="levelLabel">
+                <el-input v-model="formData.name" placeholder="请输入名称"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -69,13 +43,7 @@ export default {
         backdata: {}
       },
       formData: {
-        p1name:'',
-        p2name:'',
-        p3name:'',
-        p4name:'',
-        p5name:'',
-        p6name:'',
-        p7name:''
+        name:''
       },
       rules: {
         p1id: [
@@ -88,6 +56,10 @@ export default {
     levelLabel(){
       let nameArr=['省市','院校','院系','专业','专业方向','专业方向课程','科目']
       return nameArr[this.initData.level-1]
+    },
+    pLabel(){
+      let nameArr=['省市','院校','院系','专业','专业方向','专业方向课程','科目']
+      return nameArr[this.initData.level-2]
     }
   },
   methods: {
@@ -99,9 +71,8 @@ export default {
     },
     openHandle: function(){
       this.formData = Object.assign({}, this.$options.data().formData) 
-      if(this.initData){
-        
-      }
+      
+      this.formData = Object.assign({}, this.initData)
     },
     btnSure: function(){
        this.$refs.form.validate(valid => {
