@@ -1,7 +1,7 @@
 <template>
   <div class="app-container fixed-footer">
     <header class="header">
-      <span>用户管理</span>
+      <span>用户分数管理</span>
       <svg-icon @click='refresh' :class-name="refreshclass" icon-class='refresh'/>
       <div style="float: right">
         <el-button type="warning" v-if="item.val !== filter.Status" v-for="(item, index) in tabName" :key="index" @click="allSetStatus(item.name)">批量{{item.name}}</el-button>

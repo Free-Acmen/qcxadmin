@@ -64,7 +64,7 @@ export default {
       option: {
         isModal: true,
         title: '院校信息维护',
-        width: '700px',
+        width: '600px',
         top: '50px',
         backdata: {}
       },
@@ -112,7 +112,24 @@ export default {
           this.saveState = false
           var formdata = Object.assign({}, this.formData)
 
-          // this.$emit('formdata', formdata, this.option.backdata)
+          let level = Number(this.initData.level)+1
+          let name = formdata['p'+level+'name']
+          let prid =  this.initData.id.split('-').slice(-1)
+
+          let rid= Math.random().toString().slice(-3)
+          let id = this.initData.id+ '-' + id
+          let nodeData={
+            id: id,
+            rid: rid,
+            isSmall: level-7>=0,
+            level: level,
+            name: name,
+            pid: this.initData.id,
+            pname: this.initData.name,
+            prid: prid,
+          }
+
+          this.$emit('formdata', nodeData, this.initData)
           this.isShow = false
         } else {
           this.CFunc.showMsg('请先完善信息,再提交!', 'error')

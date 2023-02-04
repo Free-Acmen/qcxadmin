@@ -38,7 +38,7 @@ export default {
       option: {
         isModal: true,
         title: '院校信息维护',
-        width: '700px',
+        width: '600px',
         top: '50px',
         backdata: {}
       },
@@ -70,8 +70,6 @@ export default {
       this.initData = data
     },
     openHandle: function(){
-      this.formData = Object.assign({}, this.$options.data().formData) 
-      
       this.formData = Object.assign({}, this.initData)
     },
     btnSure: function(){
@@ -82,8 +80,7 @@ export default {
           }
           this.saveState = false
           var formdata = Object.assign({}, this.formData)
-
-          // this.$emit('formdata', formdata, this.option.backdata)
+          this.$emit('formdata', formdata, this.initData)
           this.isShow = false
         } else {
           this.CFunc.showMsg('请先完善信息,再提交!', 'error')

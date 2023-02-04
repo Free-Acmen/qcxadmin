@@ -104,6 +104,7 @@ export const asyncRouterMap = [
       {
         path: 'professionalmanagement',
         name: 'ProfessionalManagement',
+        // hidden: true,
         component: () => import('@/views/score/professionalmanagement/index'),
         meta: { title: '专业维护', icon: 'taskcenter' , roles: ['admin']},
       },
@@ -114,8 +115,6 @@ export const asyncRouterMap = [
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
-
-
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support
