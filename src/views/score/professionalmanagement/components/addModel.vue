@@ -114,7 +114,7 @@ export default {
 
           let level = Number(this.initData.level)+1
           let name = formdata['p'+level+'name']
-          let prid =  this.initData.id.split('-').slice(-1)
+          let prid =  this.initData.id.split('-').slice(-1)[0]
 
           let rid= Math.random().toString().slice(-3)
           let id = this.initData.id+ '-' + id

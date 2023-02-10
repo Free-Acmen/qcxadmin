@@ -5,6 +5,13 @@
        <!-- <svg-icon @click='refresh' :class-name="refreshclass" icon-class='refresh'/> -->
     </header>
     <section class="content">
+      <!-- <el-input
+        placeholder="输入关键字进行过滤"
+        v-model="filterText">
+      </el-input> 
+      :filter-node-method="filterNode"
+      -->
+
       <el-tree
         ref="tree"
         :props="{
@@ -61,7 +68,7 @@ import { mapGetters } from 'vuex'
 import addModel from './components/addModel'
 import editModel from './components/editModel'
 
-import { getNextPaths } from '@/api/score'
+import { getNextPaths, addPaths, editPaths, delPaths } from '@/api/score'
 
 let p1idKey = {}
 
@@ -74,6 +81,7 @@ export default {
       filter: {
         OrderBy: '',
       },
+      filterText:'',
       loading: false,
       list:[]
     }
@@ -109,6 +117,11 @@ export default {
       this.loading=false          
     })
   },
+  // watch: {
+  //   filterText(val) {
+  //     this.$refs.tree.filter(val);
+  //   }
+  // },
   methods: {
     refresh(){
       this.loading=true    
@@ -122,6 +135,10 @@ export default {
       //   this.loading=false          
       // })
     },
+    // filterNode(value, data) {
+    //   if (!value) return true;
+    //   return data.name.indexOf(value) !== -1;
+    // },
     add(node, data){
       this.$refs.addModule.show(data, {})
     },
@@ -138,13 +155,28 @@ export default {
       //   rid:"8"
       // }
       console.log(nodeData)
-      this.$refs.tree.append(nodeData, parentData)      
+      addPaths(nodeData).then(res=>{
+        if(res.success){
+          this.$refs.tree.append(res.data, parentData)
+          this.CFunc.showMsg('数据添加成功!')          
+        }else{
+          this.CFunc.showMsg('数据添加失败!', 'error')
+          
+        }      
+      })
     },
     edit(node, data){
       this.$refs.editModel.show(data, {})
     },
     editHandle(data, nodeData){
-      nodeData.name = data.name
+      editPaths(data).then(res=>{
+        if(res.success){
+          nodeData.name = data.name
+          this.CFunc.showMsg('数据更新成功!')          
+        }else{
+          this.CFunc.showMsg('数据更新失败!', 'error')
+        }
+      })
     },
     del(node, data){
       this.$confirm(`你确定要删除 ${data.name} 的相关数据吗？`, '提示', {
@@ -152,7 +184,14 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$refs.tree.remove(node)      
+        delPaths({id: node.id}).then(res=>{
+          if(res.success){
+            this.$refs.tree.remove(node)     
+            this.CFunc.showMsg('数据删除成功!')          
+          }else{
+            this.CFunc.showMsg('数据删除失败!', 'error')
+          }
+        })
       }).catch(() => { });
     },
     // load(tree, treeNode, resolve) {
@@ -170,7 +209,7 @@ export default {
     //   })
     // },
     treeload(node, resolve) {
-      console.log(node, 1212)
+      // console.log(node, 1212)
       if(node.level==0){
         getNextPaths(0).then(res => {
           let p1idList = res.data

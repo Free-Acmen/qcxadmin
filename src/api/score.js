@@ -36,10 +36,32 @@ export function exportTab(data) {
 
 export function getStatusLog(data) {
   return request({
-  	url:'HYJY/Users/SetStatusLog',
+  	url:'HYJY/StatusLog/GetList',
   	method: 'post',
   	data
   })
 }
 
+
+export function addPaths(data) {
+  return request({
+  	url:'HYJY/Paths/AddPaths',
+  	method: 'post',
+  	data
+  })
+}
+export function editPaths(data) {
+  return request({
+  	url:'HYJY/Paths/EditPaths',
+  	method: 'post',
+  	data
+  })
+}
+export function delPaths(data) {
+  return request({
+  	url:'HYJY/Paths/DelPaths',
+  	method: 'post',
+  	data
+  })
+}
 
