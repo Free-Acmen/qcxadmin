@@ -27,7 +27,7 @@
             </el-col>
             <el-col :span="24" v-if="initData.level==4">
               <el-form-item  prop="p5name" label="专业方向">
-                <el-input v-model="formData.p4name" placeholder="请输入专业名称"></el-input>
+                <el-input v-model="formData.p5name" placeholder="请输入专业名称"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="24" v-if="initData.level==5">
@@ -117,7 +117,7 @@ export default {
           let prid =  this.initData.id.split('-').slice(-1)[0]
 
           let rid= Math.random().toString().slice(-3)
-          let id = this.initData.id+ '-' + id
+          let id = this.initData.id+ '-' + rid
           let nodeData={
             id: id,
             rid: rid,
@@ -126,7 +126,7 @@ export default {
             name: name,
             pid: this.initData.id,
             pname: this.initData.name,
-            prid: prid,
+            prid: prid
           }
 
           this.$emit('formdata', nodeData, this.initData)

@@ -45,21 +45,21 @@ export function getStatusLog(data) {
 
 export function addPaths(data) {
   return request({
-  	url:'HYJY/Paths/AddPaths',
+  	url:'HYJY/Paths/Add',
   	method: 'post',
   	data
   })
 }
 export function editPaths(data) {
   return request({
-  	url:'HYJY/Paths/EditPaths',
+  	url:'HYJY/Paths/Update',
   	method: 'post',
   	data
   })
 }
 export function delPaths(data) {
   return request({
-  	url:'HYJY/Paths/DelPaths',
+  	url:'HYJY/Paths/Delete',
   	method: 'post',
   	data
   })

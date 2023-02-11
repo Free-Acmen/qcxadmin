@@ -132,7 +132,7 @@
           	</div>            
           </template>
         </el-table-column>  
-         <el-table-column label="操作" header-align="center" width="190">
+        <el-table-column label="操作" header-align="center" width="190" fixed="right">
           <template slot-scope="scope">
           	<!-- <el-button type="text" v-if="userInfo.IsSuperAdmin" @click="reSetPassword(scope.row, scope.$index)" >重置密码</el-button> -->
             <el-button type="text" @click="ModuleHandle(scope.row, scope.$index)">编辑</el-button>

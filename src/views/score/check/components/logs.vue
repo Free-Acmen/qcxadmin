@@ -4,10 +4,9 @@
       <div>
         <el-table :data="logsList">
           <el-table-column align="center" type="index" label="序号" width="50"></el-table-column>
-  
-          <el-table-column property="optType" label="操作类型"></el-table-column>
-          <el-table-column property="opter" label="操作人"></el-table-column>
-          <el-table-column property="date" label="操作时间"></el-table-column>
+          <el-table-column property="OpType" label="操作类型"></el-table-column>
+          <el-table-column property="RealName" label="操作人"></el-table-column>
+          <el-table-column property="CreateTime" label="操作时间"></el-table-column>
         </el-table>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -49,7 +48,7 @@ export default {
       this.getLogs()
     },
     getLogs(){
-      getStatusLog({Id: this.initData.Id}).then(res => {
+      getStatusLog({RId: this.initData.Id}).then(res => {
         this.logsList = res.data || []
       })
     }

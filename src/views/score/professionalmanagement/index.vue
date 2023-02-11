@@ -143,18 +143,7 @@ export default {
       this.$refs.addModule.show(data, {})
     },
     addHandle(nodeData, parentData){
-      // let a={
-      //   CreateTime: '2022-02-21 16:00:36',
-      //   id:"1-10001-1-025100-0-1526-101-8",
-      //   isSmall:true,
-      //   level:7,
-      //   name:"sssdsdsdsds",
-      //   pid:"1-10001-1-025100-0-1526-101",
-      //   pname:"思想政治理论+英语（一）+数学（三）+金融学综合",
-      //   prid:"101",
-      //   rid:"8"
-      // }
-      console.log(nodeData)
+      // console.log(nodeData)
       addPaths(nodeData).then(res=>{
         if(res.success){
           this.$refs.tree.append(res.data, parentData)
@@ -179,12 +168,13 @@ export default {
       })
     },
     del(node, data){
-      this.$confirm(`你确定要删除 ${data.name} 的相关数据吗？`, '提示', {
+      console.log(node)
+      this.$confirm(`你确定要删除 ${data.name} 的相关数据吗,其子数据也会同步删除且无法恢复？`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        delPaths({id: node.id}).then(res=>{
+        delPaths({id: node.data.id}).then(res=>{
           if(res.success){
             this.$refs.tree.remove(node)     
             this.CFunc.showMsg('数据删除成功!')          
