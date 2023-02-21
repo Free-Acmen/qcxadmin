@@ -11,7 +11,7 @@
             </el-col>
             <el-col :span="11" :offset="2">
               <el-form-item  prop="UserPassword" label="密码" >
-                <el-input type="password"  v-model="formData.UserPassword" placeholder="请输入密码" :disabled="option.backdata.type == 'edit'"></el-input>
+                <el-input type="password"  v-model="formData.UserPassword" placeholder="请输入密码" :disabled="true"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
@@ -125,7 +125,7 @@ export default {
       // roleList: [],
       formData: {
       	UserName:'',
-      	UserPassword:'',
+      	UserPassword:'94200456',
         RealName:'',
         Email:'',
         MobilePhone: '',

@@ -5,7 +5,7 @@
       <svg-icon @click='refresh' :class-name="refreshclass" icon-class='refresh'/>
       <div style="float: right">
         <el-button type="warning" v-if="item.val !== filter.Status" v-for="(item, index) in tabName" :key="index" @click="allSetStatus(item.name)">批量{{item.name}}</el-button>
-        <el-button  type="primary" @click="exportExcel">导出当前数据</el-button> 
+        <el-button v-if="userInfo.UserName=='admin'"  type="primary" @click="exportExcel">导出当前数据</el-button> 
       </div>
     </header>
     <section class="content">

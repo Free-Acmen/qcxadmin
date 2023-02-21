@@ -116,7 +116,7 @@ export default{
         type: 'warning'
       }).then(() => {
         let Id = JSON.stringify(rowData.Id)
-        this.del(this.apiPath, Id).then( res => {
+        this.del(this.apiPath, {Id: rowData.Id}).then( res => {
           this.CFunc.showMsg('删除成功!')
           this.GetList()
         })
