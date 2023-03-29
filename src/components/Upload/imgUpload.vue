@@ -9,10 +9,10 @@
       :on-success = "handleSuccess"
       :before-remove="beforeRemove"
       :on-remove="handleRemove"
-      multiple
+      :multiple="multiple"
       :limit="limit"
       list-type="picture-card"
-      :show-file-list="true"
+      :show-file-list="false"
       :file-list="fileList"
       :on-exceed="handleExceed">
       <!-- <el-button type="primary">点击上传</el-button> -->
@@ -36,15 +36,6 @@ export default {
   data() {
     return {
       action: action
-      // headers: {
-      //   loginName: getCookie('name'),
-      //   token: getCookie('token')
-      // },
-      // uploadData: {
-      //   path: '121212',
-      //   createUser: 'admin'
-      // },
-      // fileList: [],
     };
   },
   props: {
@@ -73,9 +64,13 @@ export default {
       type: String,
       default: '', //'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel'
     },
+    multiple:{
+      type: Boolean,
+      default: false
+    },
     limit: {
       type: Number,
-      default: 9999
+      default: 1
     },
     tip: {
       type: String,
@@ -84,14 +79,17 @@ export default {
   },
   methods: {
     beforeUpload(file){
-      console.log(file)
+      // console.log(file)
     },
     handlePreview(file) {
-      console.log(file);
+      // console.log(file);
     },
     handleSuccess(response, file, fileList){
-      console.log(response, file, fileList)
-      console.log(this.fileList)
+      if(response.success&&response.data){
+        this.$emit('success', response, file, fileList)
+      }else{
+        this.CFunc.showMsg('上传文件失败!', 'error')
+      }
     },
     handleExceed(files, fileList) {
       this.$message.warning(`当前限制选择 ${this.limit} 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
@@ -100,7 +98,7 @@ export default {
       return this.$confirm(`确定移除 ${ file.name }？`);
     },
     handleRemove(file, fileList) {
-      console.log(file, fileList);
+      // console.log(file, fileList);
     }
   }
 }

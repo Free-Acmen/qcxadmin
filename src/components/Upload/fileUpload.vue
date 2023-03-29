@@ -12,10 +12,10 @@
       :before-remove="beforeRemove"
       :on-remove="handleRemove"
       :limit="limit"
-      :show-file-list="true"
+      :show-file-list="false"
       :file-list="fileList"
       :on-exceed="handleExceed">
-      <el-button v-if="!drag" type="primary">点击上传</el-button>
+      <el-button v-if="!drag" type="text">点击上传</el-button>
       <i v-if="drag" class="el-icon-upload"></i>
       <div v-if="drag" class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
       <div slot="tip" class="el-upload__tip">{{tip}}</div>

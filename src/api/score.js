@@ -65,3 +65,22 @@ export function delPaths(data) {
   })
 }
 
+export function setHomeConfig(data) {
+  return request({
+  	url:'HYJY/Home/SetHomeConfig',
+  	method: 'post',
+  	data
+  })
+}
+
+export function getHomeConfig(data) {
+  return request({
+  	url:'HYJY/Home/GetHomeConfig',
+  	method: 'post',
+  	data
+  })
+}
+
+
+
+

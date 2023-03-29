@@ -108,6 +108,12 @@ export const asyncRouterMap = [
         component: () => import('@/views/score/professionalmanagement/index'),
         meta: { title: '专业维护', icon: 'taskcenter' , roles: ['admin']},
       },
+      {
+        path: 'homesettings',
+        name: 'HomeSettings',
+        component: () => import('@/views/score/homesettings/index'),
+        meta: { title: '页面参数设置', icon: 'taskcenter' , roles: ['admin']},
+      },
       
     ]
   },
